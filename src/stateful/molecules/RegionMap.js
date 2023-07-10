@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {arrayFlatten} from 'base/DataStructures.js';
-import GeoServer from 'core/GeoServer.js';
+import Server from 'core/Server.js';
 import {Polyline} from 'react-leaflet';
 
 import './RegionMap.css';
@@ -17,7 +17,7 @@ export default class RegionMap extends Component {
     const {regionID} = this.props;
     try {
       this.setState({
-        geo: await GeoServer.getGeo(regionID),
+        geo: await Server.getGeo(regionID),
       })
     } catch (err) {}
   }

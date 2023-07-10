@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import GIGServer from 'core/GIGServer.js';
+import Server from 'core/Server.js';
 
 import Loader from 'nonstate/atoms/Loader.js';
 import InfoTable from 'nonstate/molecules/InfoTable.js';
@@ -16,7 +16,7 @@ export default class EntityInfoPane extends Component {
   async componentDidMount() {
     const {entityID} = this.props;
     try {
-      const entityData = await GIGServer.getEntity(entityID);
+      const entityData = await Server.getEntity(entityID);
       this.setState({
         baseInfo: getBaseInfo(entityData),
         parentEntityInfo: getParentEntityInfo(entityData),

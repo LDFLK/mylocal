@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import {ENTITY} from 'constants/EntityConstants.js';
 import Entity from 'core/Entity.js';
-import GIGServer from 'core/GIGServer.js';
+import Server from 'core/Server.js';
 
 import './EntityLink.css';
 
@@ -13,7 +13,7 @@ export default class EntityLink extends Component {
   }
   async componentDidMount() {
     try {
-      const entity = await GIGServer.getEntity(this.props.entityID);
+      const entity = await Server.getEntity(this.props.entityID);
       this.setState({entity});
     } catch (err) {}
   }

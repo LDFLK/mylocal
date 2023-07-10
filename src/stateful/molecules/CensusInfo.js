@@ -1,6 +1,6 @@
 import {Component} from 'react';
 
-import GIGServer from 'core/GIGServer.js';
+import Server from 'core/Server.js';
 import {CENSUS_TABLE_SPAN_INFO} from 'constants/CensusConstants.js';
 import {getCensusLabel} from 'core/Census.js';
 import CensusDescription from 'nonstate/atoms/CensusDescription.js';
@@ -21,7 +21,7 @@ export default class CensusInfo extends Component {
   async componentDidMount() {
     const {tableName, entityID} = this.props;
     try {
-      const dataMap = await GIGServer.getCensus(tableName, entityID);
+      const dataMap = await Server.getCensus(tableName, entityID);
       this.setState({dataMap});
     } catch (err) {}
   }

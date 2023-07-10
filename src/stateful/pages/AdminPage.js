@@ -11,7 +11,7 @@ import {LAT_LNG} from 'constants/LatLngConstants.js';
 import {getRegionBBox} from 'core/RegionGeo.js';
 import {getZoom} from 'base/OSM.js';
 import {ENTITY} from 'constants/EntityConstants.js';
-import GeoServer from 'core/GeoServer.js';
+import Server from 'core/Server.js';
 
 import DetailedInfoPane from 'stateful/molecules/DetailedInfoPane.js';
 import EntityInfoPane from 'stateful/molecules/EntityInfoPane.js';
@@ -23,7 +23,7 @@ import MapLocationMarker from 'stateful/atoms/MapLocationMarker.js';
 
 import './AdminPage.css';
 
-export const DEFAULT_ZOOM = 16;
+export const DEFAULT_ZOOM = 13;
 
 export default class AdminPage extends Component {
   static getDefaultLatLngAndZoom() {
@@ -47,8 +47,7 @@ export default class AdminPage extends Component {
     const {regionID} = this.state;
     const regionType = Entity.getEntityType(regionID);
     try {
-      const region = await GeoServer.getRegionInfo([lat, lng]);
-      console.debug('onChangeLocation', region);
+      const region = await Server.getRegionInfo([lat, lng]);
       const gndID = region[regionType] ?? region[ENTITY.DISTRICT];
       this.setState({regionID: gndID});
     } catch(err) {}

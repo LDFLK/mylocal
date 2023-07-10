@@ -6,7 +6,7 @@ export default class WWW {
     if (urlRelative.includes('http')) {
       return urlRelative;
     }
-    return `${process.env.PUBLIC_URL}/mylocal/${urlRelative}`;
+    return `${process.env.REACT_APP_PUBLIC_URL}/mylocal/${urlRelative}`;
   }
 
   static async getJSON(urlRelative) {

@@ -1,0 +1,19 @@
+.location-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #ffffff;
+  color: #505050;
+  border: none;
+  border-radius: 60%;
+  padding: 1px;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  opacity: 0.8;
+  transform: scale(0.8);
+}
+
+.location-button i {
+  margin-right: 5px;
+}

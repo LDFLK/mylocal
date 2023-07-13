@@ -17,6 +17,7 @@ import DetailedInfoPane from 'stateful/molecules/DetailedInfoPane.js';
 import EntityInfoPane from 'stateful/molecules/EntityInfoPane.js';
 import Infobox from 'nonstate/molecules/Infobox.js';
 import RegionMap from 'stateful/molecules/RegionMap.js';
+import LocationButton from 'stateful/molecules/LocationButton.js';
 
 import Loader from 'nonstate/atoms/Loader.js';
 import MapLocationMarker from 'stateful/atoms/MapLocationMarker.js';
@@ -37,6 +38,7 @@ export default class AdminPage extends Component {
       {regionID: this.props.match?.params?.regionID || DEFAULT_ENTITY_ID},
     );
     this.onChangeLocation = this.onChangeLocation.bind(this);
+    this.getUserLocation = this.getUserLocation.bind(this);
   }
 
   getRegionID() {
@@ -93,6 +95,25 @@ export default class AdminPage extends Component {
     );
   }
 
+  async getUserLocation() {
+    try {
+      const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
+
+      const { latitude, longitude } = position.coords;
+      this.setState({
+        latLng: [latitude, longitude],
+        zoom: DEFAULT_ZOOM,
+      });
+
+      await this.onChangeLocation([latitude, longitude]);
+
+    } catch (error) {
+      console.error('Error getting user location:', error);
+    }
+  }
+
   render() {
     if (!this?.state?.latLng) {
       return <Loader />;
@@ -102,6 +123,7 @@ export default class AdminPage extends Component {
 
     return (
       <div key={`page-${lat}-${lng}-${zoom}`}>
+        <LocationButton onClick={this.getUserLocation} />
         <MapContainer center={[lat, lng]} zoom={zoom}>
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           {this.renderInnerMapLayer()}

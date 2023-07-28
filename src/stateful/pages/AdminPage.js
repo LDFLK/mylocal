@@ -110,12 +110,13 @@ export default class AdminPage extends Component {
       });
 
       const { latitude, longitude } = position.coords;
+      const {zoom} = await this.getLatLngAndZoom();
+      
+      await this.onChangeLocation([latitude, longitude]);
       this.setState({
         latLng: [latitude, longitude],
-        zoom: DEFAULT_ZOOM,
+        zoom: zoom,
       });
-
-      await this.onChangeLocation([latitude, longitude]);
 
     } catch (error) {
       console.error('Error getting user location:', error);

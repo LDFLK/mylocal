@@ -32,15 +32,15 @@ export default class EntityLink extends Component {
       className += 'link-id';
     }
 
-
+    let pageName = 'admin';
     const key = `a-${iEntityID}-${entityID}`;
 
     return (
       <a
         key={key}
         className={className}
-        href={`/${entityID}`}
-      >
+        href={`/mylocal/${pageName}/${entityID}`}
+        >
         {label}
       </a>
     )

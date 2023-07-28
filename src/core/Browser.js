@@ -10,5 +10,5 @@ export function getBrowserLatLng(callback) {
 }
 
 export function redirectToDefault() {
-  window.location.href = "/";
+  window.location.href = "/mylocal";
 }

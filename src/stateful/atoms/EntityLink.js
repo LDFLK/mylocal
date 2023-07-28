@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-import {ENTITY} from 'constants/EntityConstants.js';
 import Entity from 'core/Entity.js';
 import Server from 'core/Server.js';
 
@@ -22,9 +21,6 @@ export default class EntityLink extends Component {
     const {entityID, iEntityID} = this.props;
     const entityType = Entity.getEntityType(entityID)
 
-    if (entityID === 'LK') {
-      return 'Sri Lanka';
-    }
     const {entity} = this.state;
 
     let label = entityID;
@@ -36,10 +32,6 @@ export default class EntityLink extends Component {
       className += 'link-id';
     }
 
-    let pageName = 'admin';
-    if (entityType === ENTITY.PS) {
-      pageName = 'place';
-    }
 
     const key = `a-${iEntityID}-${entityID}`;
 
@@ -47,7 +39,7 @@ export default class EntityLink extends Component {
       <a
         key={key}
         className={className}
-        href={`/mylocal/${pageName}/${entityID}`}
+        href={`/${entityID}`}
       >
         {label}
       </a>

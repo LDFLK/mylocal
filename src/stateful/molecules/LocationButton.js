@@ -6,7 +6,7 @@ import './LocationButton.css';
 export default function LocationButton({ onClick }) {
   return (
     <button className="location-button" onClick={onClick}>
-      <img src="/mylocal/location-icon.svg" alt="" />
+      <img src="/location-icon.svg" alt="" />
     </button>
   );
 }

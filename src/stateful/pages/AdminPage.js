@@ -24,21 +24,29 @@ import MapLocationMarker from 'stateful/atoms/MapLocationMarker.js';
 
 import './AdminPage.css';
 
-export const DEFAULT_ZOOM = 13;
+export const DEFAULT_ZOOM = 8;
 
 export default class AdminPage extends Component {
   static getDefaultLatLngAndZoom() {
-    return {latLng: LAT_LNG.COLOMBO, zoom: DEFAULT_ZOOM};
+    return {latLng: LAT_LNG.CENTROID, zoom: DEFAULT_ZOOM};
   }
 
   constructor(props) {
     super(props);
-    this.state = Object.assign({},
+    this.state = Object.assign(
       AdminPage.getDefaultLatLngAndZoom(),
       {regionID: this.props.match?.params?.regionID || DEFAULT_ENTITY_ID},
     );
     this.onChangeLocation = this.onChangeLocation.bind(this);
     this.getUserLocation = this.getUserLocation.bind(this);
+    console.log = console.warn = console.error = () => {};
+  }
+
+  async componentDidMount() {
+    const {zoom, latLng} = await this.getLatLngAndZoom();
+    try {
+      this.setState({latLng: latLng, zoom: zoom });
+    } catch (err) {}
   }
 
   getRegionID() {

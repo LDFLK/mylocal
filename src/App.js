@@ -18,11 +18,11 @@ export default class App extends Component {
     return (
       <div className="App">
         <TestMode />
-        <Router basename="/mylocal">
+        <Router>
           <Switch>
-            <Route path="/admin/:regionID" component={AdminPage}/>
+            <Route path="/:regionID"component={AdminPage}/>
             <Route>
-               <Redirect to={`/admin/${DEFAULT_ENTITY_ID}`} />
+               <Redirect to={`/${DEFAULT_ENTITY_ID}`} />
             </Route>
           </Switch>
         </Router>

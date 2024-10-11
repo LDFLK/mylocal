@@ -3,7 +3,7 @@ FROM node:14.19-slim as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
-ARG SERVER_HOST=https://f2c7f522-ef47-48ce-a429-3fc2f15d2011-dev.e1-us-east-azure.choreoapis.dev/ldf/my-local-service/v1.0/regions/6.935330610352891,79.92789745330812
+ARG SERVER_HOST=https://f2c7f522-ef47-48ce-a429-3fc2f15d2011-dev.e1-us-east-azure.choreoapis.dev/ldf/my-local-service/v1.0
 
 RUN apt-get update && apt-get install python -y && \
     apt-get install git -y && \

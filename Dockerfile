@@ -33,8 +33,8 @@ COPY --from=build /app/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /app/nginx/mime.types /etc/nginx/mime.types
 
 # Create necessary directories and set permissions
-RUN mkdir -p /tmp/client_temp /var/run/nginx && \
-    chown -R choreouser:choreo /tmp/client_temp /usr/share/nginx/html/mylocal /var/run/nginx
+RUN mkdir -p /tmp/client_temp /tmp/proxy_temp /tmp/fastcgi_temp /var/cache/nginx /var/run/nginx && \
+    chmod -R 777 /tmp /var/cache/nginx /usr/share/nginx/html/mylocal /var/run/nginx
 
 USER 10014
 EXPOSE 8080

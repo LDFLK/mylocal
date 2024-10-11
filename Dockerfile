@@ -36,6 +36,8 @@ RUN mkdir -p /tmp/nginx/client_temp /tmp/nginx/proxy_temp /tmp/nginx/fastcgi_tem
     chmod -R 755 /etc/nginx && \
     chown -R choreouser:choreo /var/cache/nginx /var/run/nginx /usr/share/nginx/html/mylocal /tmp/nginx
 
-USER choreouser
+# Explicitly set USER to 10014 (choreouser)
+USER 10014
+
 EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]

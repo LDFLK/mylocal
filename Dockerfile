@@ -29,13 +29,7 @@ COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/mime.types /etc/nginx/mime.types
 
 # Create necessary directories and set permissions
-RUN mkdir -p /tmp/nginx/client_temp \
-             /tmp/nginx/proxy_temp \
-             /tmp/nginx/fastcgi_temp \
-             /tmp/nginx/uwsgi_temp \
-             /tmp/nginx/scgi_temp \
-             /var/cache/nginx \
-             /var/run && \
+RUN mkdir -p /tmp/nginx && \
     chmod -R 777 /tmp/nginx /var/cache/nginx /var/run /etc/nginx /usr/share/nginx/html && \
     chown -R choreouser:choreo /tmp/nginx /var/cache/nginx /var/run /usr/share/nginx/html
 

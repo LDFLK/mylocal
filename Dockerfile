@@ -25,13 +25,13 @@ RUN apk update && apk upgrade
 
 COPY --from=build /app/build/mylocal /usr/share/nginx/html/mylocal
 RUN rm /etc/nginx/conf.d/default.conf
-COPY /app/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY /app/nginx/mime.types /etc/nginx/mime.types
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY nginx/mime.types /etc/nginx/mime.types
 
 # Create necessary directories and set permissions
-RUN mkdir -p /tmp/nginx /var/cache/nginx /var/run /var/log/nginx && \
+RUN mkdir -p /tmp/nginx/client_temp /tmp/nginx/proxy_temp /tmp/nginx/fastcgi_temp /tmp/nginx/uwsgi_temp /tmp/nginx/scgi_temp /var/cache/nginx /var/run /var/log/nginx && \
     chown -R 10014:10014 /tmp/nginx /var/cache/nginx /var/run /var/log/nginx /usr/share/nginx/html/mylocal && \
-    chmod -R 755 /tmp/nginx /var/cache/nginx /var/run /var/log/nginx /usr/share/nginx/html
+    chmod -R 777 /tmp/nginx /var/cache/nginx /var/run /var/log/nginx /usr/share/nginx/html
 
 # Create a non-root user
 RUN adduser -D -u 10014 choreouser

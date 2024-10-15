@@ -6,7 +6,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 ARG SERVER_HOST=https://f2c7f522-ef47-48ce-a429-3fc2f15d2011-dev.e1-us-east-azure.choreoapis.dev/ldf/my-local-service/v1.0
 
 RUN apk update && apk upgrade && \
-    apk add --no-cache git
+    apk add --no-cache git python3 make g++
 
 COPY package.json package-lock.json ./
 RUN npm ci

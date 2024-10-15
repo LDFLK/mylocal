@@ -5,12 +5,12 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 ARG SERVER_HOST=https://f2c7f522-ef47-48ce-a429-3fc2f15d2011-dev.e1-us-east-azure.choreoapis.dev/ldf/my-local-service/v1.0
 
-RUN apt-get update && apt-get install python -y && \
-    apt-get install git -y && \
-    apt-get install build-essential -y
+RUN apt-get update && apt-get install -y \
+    python \
+    git \
+    build-essential
 
-COPY package.json ./
-COPY package-lock.json ./
+COPY package.json package-lock.json ./
 RUN npm ci 
 RUN npm install react-scripts@3.4.1 -g --silent
 COPY . .
@@ -31,12 +31,11 @@ COPY --from=build /app/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /app/nginx/mime.types /etc/nginx/mime.types
 
 # Create necessary directories and set permissions
-RUN mkdir -p /tmp/nginx/client_temp /tmp/nginx/proxy_temp /tmp/nginx/fastcgi_temp /tmp/nginx/uwsgi_temp /tmp/nginx/scgi_temp /var/cache/nginx /var/run/nginx && \
-    chmod -R 777 /tmp/nginx /var/cache/nginx /usr/share/nginx/html/mylocal /var/run/nginx && \
-    chmod -R 755 /etc/nginx && \
-    chown -R choreouser:choreo /var/cache/nginx /var/run/nginx /usr/share/nginx/html/mylocal /tmp/nginx
+RUN mkdir -p /tmp/nginx /var/cache/nginx /var/run /var/log/nginx && \
+    chown -R 10014:10014 /tmp/nginx /var/cache/nginx /var/run /var/log/nginx /usr/share/nginx/html/mylocal && \
+    chmod -R 755 /tmp/nginx /var/cache/nginx /var/run /var/log/nginx /usr/share/nginx/html
 
-# Explicitly set USER to 10014 (choreouser)
+# Switch to the non-root user
 USER 10014
 
 EXPOSE 8080

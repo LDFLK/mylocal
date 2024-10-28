@@ -1,0 +1,30 @@
+# curl and libcurl4 vulnerabilities
+CVE-2021-22945
+CVE-2022-32207
+CVE-2022-32221
+CVE-2023-38545
+CVE-2023-23914
+
+# libexpat1 vulnerabilities
+CVE-2024-45490
+CVE-2024-45491
+CVE-2024-45492
+
+# libfreetype6 vulnerability
+CVE-2022-27404
+
+# Kerberos-related vulnerabilities
+CVE-2024-37371
+
+# libpcre2-8-0 vulnerabilities
+CVE-2022-1586
+CVE-2022-1587
+
+# OpenSSL-related vulnerabilities
+CVE-2022-2068
+
+# libtasn1-6 vulnerability
+CVE-2021-46848
+
+# zlib vulnerability
+CVE-2022-37434

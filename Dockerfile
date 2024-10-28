@@ -3,7 +3,7 @@ FROM node:14.19-alpine as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
-ARG SERVER_HOST=https://f2c7f522-ef47-48ce-a429-3fc2f15d2011-dev.e1-us-east-azure.choreoapis.dev/ldf/my-local-service/v1.0
+ARG SERVER_HOST=https://service.mylocal.datafoundation.lk/my-local/my-local-service/v1.0
 
 RUN apk update && apk upgrade && \
     apk add --no-cache git python3 make g++

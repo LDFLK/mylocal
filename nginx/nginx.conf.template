@@ -24,11 +24,10 @@ http {
 
     server {
         listen 8080;
-        server_name localhost;
-    
-        # Redirect any requests to "/" to "/mylocal"
+        server_name ${SERVER_DOMAIN};
+        
         location = / {
-            return 301 /mylocal;
+            return 301 $scheme://${SERVER_DOMAIN}/mylocal;
         }
         
         location / {

@@ -25,7 +25,7 @@ RUN addgroup -g 10014 choreo && \
     adduser -D -u 10014 -G choreo choreouser
 
 COPY --from=build /app/build/mylocal /usr/share/nginx/html/mylocal
-COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY nginx/nginx.conf.template /etc/nginx/nginx.conf.template
 COPY nginx/mime.types /etc/nginx/mime.types
 
 # Create necessary directories and set permissions
@@ -36,5 +36,8 @@ RUN mkdir -p /tmp/nginx && \
 # Explicitly set USER to 10014 (choreouser)
 USER 10014
 
+ENV SERVER_DOMAIN=localhost:8080
+
 EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"]
+
+CMD ["sh", "-c", "envsubst '${SERVER_DOMAIN}' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"]
